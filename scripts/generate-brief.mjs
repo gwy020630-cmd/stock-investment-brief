@@ -4,6 +4,7 @@ import path from "node:path";
 const ROOT = process.cwd();
 const TIME_ZONE = "Europe/London";
 const OPENAI_API_URL = "https://api.openai.com/v1/responses";
+const OPENAI_MODEL = "gpt-5.4";
 
 async function main() {
   const now = new Date();
@@ -267,6 +268,7 @@ async function fetchStructuredBrief({
     "Distinguish facts from inference.",
     "Focus on macroeconomy, AI sector developments, the supplied watchlist, and new positive AI-sector catalysts.",
     "Do not fabricate citations, prices, or time references.",
+    "Be concise and selective. Prefer 6 to 10 high-value sources instead of broad exhaustive research.",
     `The target audience is in Europe/London, and today's London date is ${london.isoDate}.`,
   ].join(" ");
 
@@ -303,12 +305,15 @@ async function fetchStructuredBrief({
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "gpt-5.5",
+      model: OPENAI_MODEL,
+      reasoning: {
+        effort: "low",
+      },
       input: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
       ],
-      tools: [{ type: "web_search" }],
+      tools: [{ type: "web_search", search_context_size: "low" }],
       text: {
         format: {
           type: "json_schema",
@@ -317,7 +322,9 @@ async function fetchStructuredBrief({
           strict: true,
         },
       },
+      max_output_tokens: 5000,
     }),
+    signal: AbortSignal.timeout(180000),
   });
 
   if (!response.ok) {
