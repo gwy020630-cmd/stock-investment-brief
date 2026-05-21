@@ -1,0 +1,64 @@
+{
+  "as_of": "2026-05-21",
+  "holdings": [
+    {
+      "ticker": "SNDK",
+      "name": "Sandisk",
+      "theme": "AI storage, NAND, datacenter memory architecture",
+      "priority": "high"
+    },
+    {
+      "ticker": "MU",
+      "name": "Micron",
+      "theme": "HBM, DRAM, AI memory",
+      "priority": "high"
+    },
+    {
+      "ticker": "AAOI",
+      "name": "Applied Optoelectronics",
+      "theme": "AI networking optics, datacenter transceivers",
+      "priority": "high"
+    },
+    {
+      "ticker": "LITE",
+      "name": "Lumentum",
+      "theme": "AI optical connectivity, datacenter photonics",
+      "priority": "high"
+    },
+    {
+      "ticker": "SK Hynix",
+      "name": "SK hynix",
+      "theme": "HBM, AI memory, advanced packaging",
+      "priority": "high"
+    },
+    {
+      "ticker": null,
+      "name": "X-energy",
+      "theme": "advanced nuclear, AI power demand, data center energy infrastructure",
+      "priority": "high",
+      "note": "Track company and sector developments even if market listing details or listing status are unclear."
+    }
+  ],
+  "watch_themes": [
+    "macroeconomy",
+    "AI infrastructure",
+    "HBM and memory",
+    "optical networking",
+    "AI storage",
+    "hyperscaler capex",
+    "export controls",
+    "power and physical AI"
+  ],
+  "discovery_focus": [
+    "new partnerships between AI leaders, suppliers, hyperscalers, and infrastructure companies",
+    "positive company-specific AI news such as earnings beats, raised guidance, product launches, customer wins, capacity expansions, and favorable management commentary",
+    "new customer wins, design wins, and strategic supply agreements",
+    "new energy, cooling, and data center infrastructure relationships tied to AI demand",
+    "new cross-sector relationships that could create second-order beneficiaries"
+  ],
+  "notes": [
+    "This file is meant to be edited whenever the portfolio changes.",
+    "Add or remove holdings without changing the briefing workflow.",
+    "The daily brief should also surface newly relevant companies that are not yet in the holdings list."
+  ]
+}

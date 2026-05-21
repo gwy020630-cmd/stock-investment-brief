@@ -1,0 +1,43 @@
+{
+  "as_of": "2026-05-21",
+  "candidates": [
+    {
+      "company": "Coherent",
+      "ticker": "COHR",
+      "date_added": "2026-05-21",
+      "catalyst_type": "earnings beat",
+      "summary": "Strong fiscal Q3 2026 results and management commentary tied to accelerating AI datacenter demand.",
+      "why_it_matters": "A scaled optics and photonics beneficiary with direct exposure to AI networking buildout.",
+      "impact_scope": "both",
+      "urgency": "watch_now",
+      "status": "new"
+    },
+    {
+      "company": "Talen Energy",
+      "ticker": "TLN",
+      "date_added": "2026-05-21",
+      "catalyst_type": "partnership",
+      "summary": "AI-power demand theme reinforced by the X-energy LOI and Talen's positioning for digital infrastructure growth.",
+      "why_it_matters": "Power availability is emerging as a real second-order AI bottleneck.",
+      "impact_scope": "both",
+      "urgency": "monitor",
+      "status": "new"
+    }
+  ],
+  "urgency_scale": {
+    "watch_now": "Strong near-term AI-sector catalyst worth reviewing before the next U.S. session.",
+    "monitor": "Interesting development, but needs more confirmation or follow-through.",
+    "low_priority": "Weak or indirect read-through for now."
+  },
+  "candidate_schema": {
+    "company": "Company name",
+    "ticker": "Ticker if known",
+    "date_added": "YYYY-MM-DD",
+    "catalyst_type": "earnings beat | raised guidance | customer win | design win | partnership | product launch | production ramp | capacity expansion | other",
+    "summary": "One-sentence explanation of the catalyst",
+    "why_it_matters": "Short explanation of the market relevance",
+    "impact_scope": "company-specific | sector-wide | both",
+    "urgency": "watch_now | monitor | low_priority",
+    "status": "new | reviewing | promoted | removed"
+  }
+}

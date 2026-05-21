@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Market Brief</title>
+    <style>
+      :root {
+        --bg: #f4efe5;
+        --panel: #fffaf2;
+        --panel-strong: #f8f0df;
+        --text: #1e1a16;
+        --muted: #665f57;
+        --line: #dccfb9;
+        --accent: #8f4e1f;
+        --bull: #22663c;
+        --neutral: #8a6a24;
+        --bear: #9a3027;
+        --shadow: 0 18px 40px rgba(58, 41, 24, 0.09);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        background:
+          radial-gradient(circle at top left, rgba(143, 78, 31, 0.13), transparent 28%),
+          linear-gradient(180deg, #f7f2e9 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .shell {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 20px 14px 48px;
+      }
+
+      .hero {
+        background: linear-gradient(145deg, rgba(255, 250, 242, 0.92), rgba(248, 240, 223, 0.98));
+        border: 1px solid rgba(220, 207, 185, 0.9);
+        border-radius: 28px;
+        padding: 24px 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--accent);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1, h2, h3 {
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 6vw, 4rem);
+        letter-spacing: -0.04em;
+      }
+
+      .hero p {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.55;
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .meta-card,
+      .panel {
+        background: rgba(255, 250, 242, 0.88);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .meta-card {
+        padding: 14px 16px;
+      }
+
+      .meta-card strong,
+      .tagline {
+        display: block;
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .meta-card span {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .panel {
+        padding: 18px 18px 20px;
+      }
+
+      .panel h2 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+      }
+
+      .panel p,
+      .panel li {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      ul {
+        padding-left: 18px;
+        margin: 0;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        padding: 8px 11px;
+        border: 1px solid var(--line);
+        background: var(--panel-strong);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 0.84rem;
+      }
+
+      .holdings,
+      .candidates {
+        display: grid;
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .card h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+
+      .label-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 10px 0 0;
+      }
+
+      .label {
+        border-radius: 999px;
+        padding: 5px 9px;
+        font-size: 0.76rem;
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        border: 1px solid var(--line);
+      }
+
+      .bullish {
+        color: var(--bull);
+        border-color: rgba(34, 102, 60, 0.24);
+        background: rgba(34, 102, 60, 0.08);
+      }
+
+      .neutral {
+        color: var(--neutral);
+        border-color: rgba(138, 106, 36, 0.24);
+        background: rgba(138, 106, 36, 0.08);
+      }
+
+      .watch-now {
+        color: var(--bull);
+        border-color: rgba(34, 102, 60, 0.24);
+        background: rgba(34, 102, 60, 0.08);
+      }
+
+      .monitor {
+        color: var(--neutral);
+        border-color: rgba(138, 106, 36, 0.24);
+        background: rgba(138, 106, 36, 0.08);
+      }
+
+      .outlook {
+        display: grid;
+        gap: 10px;
+      }
+
+      .source-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .source-list a {
+        text-decoration: none;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        text-align: center;
+      }
+
+      @media (min-width: 760px) {
+        .grid.two {
+          grid-template-columns: 1.05fr 0.95fr;
+        }
+
+        .holdings {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .candidates {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">AI Market Brief</p>
+        <h1>Read this before the U.S. open.</h1>
+        <p>
+          A compact UK-morning view of the macro setup, your AI-linked holdings, and fresh
+          opportunities that may matter before the next U.S. session.
+        </p>
+        <div class="meta">
+          <div class="meta-card">
+            <strong>Date</strong>
+            <span>May 21, 2026</span>
+          </div>
+          <div class="meta-card">
+            <strong>Prepared</strong>
+            <span>10:55 PM London time</span>
+          </div>
+          <div class="meta-card">
+            <strong>Market Context</strong>
+            <span>Neutral</span>
+          </div>
+          <div class="meta-card">
+            <strong>Next Focus</strong>
+            <span>Friday, May 22 U.S. session</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">HBM</span>
+          <span class="chip">AI optics</span>
+          <span class="chip">Inference storage</span>
+          <span class="chip">Power infrastructure</span>
+          <span class="chip">Physical AI</span>
+        </div>
+      </section>
+
+      <section class="grid two">
+        <article class="panel">
+          <h2>Executive Summary</h2>
+          <ul>
+            <li>NVIDIA beat again and guided higher, but the stock still fell, showing that AI fundamentals remain strong while expectations remain extremely high.</li>
+            <li>Oil and Treasury yields drove most of the market move. Once oil reversed lower, stocks recovered into the close.</li>
+            <li>Your strongest alignment is still with HBM, AI optics, and inference-era storage.</li>
+            <li>The best fresh non-holding ideas from today’s read-through are <strong>Coherent</strong> for optics and <strong>Talen Energy</strong> for AI-linked power.</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h2>Macro Setup</h2>
+          <p><strong>Rates and yields:</strong> The U.S. 10-year Treasury briefly approached 4.63% before easing to around 4.55% as oil rolled over.</p>
+          <p><strong>Economic read:</strong> Services softened while manufacturing held up better, which still supports a mixed “growth okay, inflation sticky” backdrop.</p>
+          <p><strong>Policy:</strong> The April 28-29, 2026 FOMC minutes said Middle East conflict and higher oil were still feeding inflation concerns.</p>
+          <p><strong>Read-through:</strong> AI remains the strongest structural theme, but rising yields can still compress high-multiple names.</p>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Portfolio Watchlist Impact</h2>
+        <div class="holdings">
+          <article class="card">
+            <h3>SNDK</h3>
+            <p>Latest official quarter showed Datacenter revenue up 233% sequentially to $1.467B, with strong Q4 guidance.</p>
+            <div class="label-row">
+              <span class="label bullish">Bullish</span>
+              <span class="label">Short term</span>
+              <span class="label">AI storage</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>MU</h3>
+            <p>Micron’s HBM4 for NVIDIA Vera Rubin is already in high-volume production, keeping it directly tied to the next AI platform cycle.</p>
+            <div class="label-row">
+              <span class="label bullish">Bullish</span>
+              <span class="label">Immediate</span>
+              <span class="label">HBM</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>AAOI</h3>
+            <p>First volume 800G shipments to a large hyperscaler support the idea that its optical ramp is becoming real, not just anticipated.</p>
+            <div class="label-row">
+              <span class="label bullish">Bullish</span>
+              <span class="label">Immediate</span>
+              <span class="label">800G optics</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>LITE</h3>
+            <p>Lumentum’s recent quarter was strong and management highlighted co-packaged optics and optical circuit switches as the next growth leg.</p>
+            <div class="label-row">
+              <span class="label bullish">Bullish</span>
+              <span class="label">Short term</span>
+              <span class="label">AI networking</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>SK hynix</h3>
+            <p>Record Q1 results and the Sandisk HBF tie-up reinforce that SK hynix remains one of the cleanest pure-play AI memory beneficiaries.</p>
+            <div class="label-row">
+              <span class="label bullish">Bullish</span>
+              <span class="label">Immediate</span>
+              <span class="label">HBM leader</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>X-energy</h3>
+            <p>Recent regulatory progress and work with Talen keep it relevant to the growing AI-power trade, though this remains more medium-term and execution-sensitive.</p>
+            <div class="label-row">
+              <span class="label bullish">Bullish</span>
+              <span class="label">Medium term</span>
+              <span class="label">AI power</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="grid two">
+        <article class="panel">
+          <h2>AI Sector Radar</h2>
+          <p><strong>Compute:</strong> NVIDIA reported fiscal Q1 2027 revenue of $81.6B and Data Center revenue of $75.2B, then guided Q2 to about $91B.</p>
+          <p><strong>Memory:</strong> Micron and SK hynix remain tightly linked to the Vera Rubin cycle, supporting the HBM supply story.</p>
+          <p><strong>Optics:</strong> Lumentum, AAOI, and Coherent all have fresh proof that AI optical demand is becoming a production-ramp trade.</p>
+          <p><strong>Storage:</strong> Sandisk’s datacenter ramp and the Sandisk/SK hynix HBF effort support the AI inference-storage thesis.</p>
+          <p><strong>Power:</strong> X-energy, Talen, and Dow are part of the growing cluster around the AI electricity bottleneck.</p>
+          <p><strong>Physical AI:</strong> The theme remains useful, but I verified it more clearly in NVIDIA’s March 16, 2026 GTC materials than in the May 20 earnings call.</p>
+        </article>
+
+        <article class="panel">
+          <h2>Market Outlook</h2>
+          <div class="outlook">
+            <p><strong>Base case:</strong> Mildly positive to mixed for Friday, with semis and optics holding up better if oil stays calmer.</p>
+            <p><strong>Bullish case:</strong> Yields stabilize, oil stays off the highs, and investors rotate back into AI suppliers after digesting NVIDIA.</p>
+            <p><strong>Bearish case:</strong> Oil or yields re-accelerate and the market de-risks high-multiple AI names again.</p>
+            <p><strong>Confidence:</strong> Medium.</p>
+            <p><strong>Key catalysts:</strong> Oil around the Strait of Hormuz, Treasury yields, and whether AI suppliers outperform NVIDIA itself.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Opportunity Watch</h2>
+        <div class="candidates">
+          <article class="card">
+            <h3>Coherent (COHR)</h3>
+            <p>Strong recent earnings and AI datacenter demand commentary make it a natural adjacent optics name if you already like LITE and AAOI.</p>
+            <div class="label-row">
+              <span class="label watch-now">Watch now</span>
+              <span class="label">Earnings beat</span>
+              <span class="label">Add to watchlist</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Talen Energy (TLN)</h3>
+            <p>More indirect, but power availability is becoming a real AI bottleneck and Talen is showing up in that infrastructure chain.</p>
+            <div class="label-row">
+              <span class="label monitor">Monitor</span>
+              <span class="label">AI power</span>
+              <span class="label">Second-order beneficiary</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Sources</h2>
+        <div class="source-list">
+          <a href="https://apnews.com/article/stocks-markets-rates-oil-nvidia-kospi-d42265575e6ca7edd4fea8edce5a74f3">AP market close May 21</a>
+          <a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260429.htm">Fed minutes released May 20, 2026</a>
+          <a href="https://investor.nvidia.com/financial-info/financial-reports/default.aspx?lang=zh-Hans">NVIDIA Q1 FY2027</a>
+          <a href="https://www.sandisk.com/company/newsroom/press-releases/2026/2026-04-30-sandisk-reports-fiscal-third-quarter-2026-financial-results">Sandisk Q3 FY2026</a>
+          <a href="https://investors.micron.com/news-releases/news-release-details/micron-high-volume-production-hbm4-designed-nvidia-vera-rubin">Micron HBM4 / Vera Rubin</a>
+          <a href="https://investors.ao-inc.com/news-releases/news-release-details/applied-optoelectronics-reports-first-quarter-2026-results">AAOI Q1 2026</a>
+          <a href="https://investor.lumentum.com/financial-news-releases/news-details/2026/Lumentum-Announces-Third-Quarter-of-Fiscal-Year-2026-Financial-Results/default.aspx">Lumentum Q3 FY2026</a>
+          <a href="https://news.skhynix.com/q1-2026-business-results/">SK hynix Q1 2026</a>
+          <a href="https://x-energy.com/news/nrc-issues-environmental-assessment-with-finding-of-no-significant-impact-for-dow-and-x-energys-propsed-advanced-nuclear-project-in-texas/">X-energy NRC milestone</a>
+          <a href="https://www.coherent.com/news/press-releases/third-quarter-fiscal-year-2026-results">Coherent Q3 FY2026</a>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        This page is designed to be overwritten by the daily automation each UK morning.
+      </p>
+    </main>
+  </body>
+</html>
