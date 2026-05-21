@@ -326,11 +326,12 @@ async function fetchStructuredBrief({
   }
 
   const payload = await response.json();
-  if (!payload.output_text) {
-    throw new Error("OpenAI API response did not include output_text.");
+  const outputText = extractOutputText(payload);
+  if (!outputText) {
+    throw new Error(`OpenAI API response did not include extractable output text. Top-level keys: ${Object.keys(payload).join(", ")}`);
   }
 
-  return payload.output_text;
+  return outputText;
 }
 
 function mergeCandidates(existing, freshCandidates, isoDate) {
@@ -378,6 +379,32 @@ function normalizeUrgency(value) {
     return normalized;
   }
   return "monitor";
+}
+
+function extractOutputText(payload) {
+  if (typeof payload.output_text === "string" && payload.output_text.length > 0) {
+    return payload.output_text;
+  }
+
+  if (!Array.isArray(payload.output)) {
+    return "";
+  }
+
+  const chunks = [];
+
+  for (const item of payload.output) {
+    if (item?.type !== "message" || !Array.isArray(item.content)) {
+      continue;
+    }
+
+    for (const part of item.content) {
+      if (part?.type === "output_text" && typeof part.text === "string") {
+        chunks.push(part.text);
+      }
+    }
+  }
+
+  return chunks.join("").trim();
 }
 
 function renderMarkdown(brief) {
