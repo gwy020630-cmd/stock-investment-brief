@@ -19,6 +19,8 @@ Each weekday morning, the brief should:
 - `watchlist_candidates.json`: candidate companies identified by the morning brief
 - `site/index.html`: mobile-friendly latest brief page
 - `PUBLISHING.md`: GitHub Pages deployment notes
+- `scripts/generate-brief.mjs`: cloud generator that calls the OpenAI Responses API
+- `.github/workflows/generate-brief.yml`: GitHub Actions schedule for the cloud run
 
 ## Daily Operating Flow
 
@@ -28,7 +30,7 @@ Each weekday morning, the brief should:
 4. Add any newly relevant names to `watchlist_candidates.json`.
 5. Review the candidates before the U.S. market opens.
 6. If a candidate becomes important enough, move it into `portfolio_watchlist.json`.
-7. If the site is published, commit and push the refreshed files so the public page updates.
+7. The cloud workflow commits and pushes the refreshed files so GitHub Pages updates automatically.
 
 ## How To Maintain It
 
@@ -44,6 +46,8 @@ Typical timing:
 - Delivery target: `8:00 AM` London time
 - U.S. market open during UK summer time: `2:30 PM` London time
 - U.S. market open during UK winter time: `3:30 PM` London time
+
+The GitHub Actions schedule runs hourly on weekdays and the generator itself only proceeds when the local `Europe/London` hour is `8`, which keeps the workflow aligned with BST and GMT.
 
 ## Decision Standard
 

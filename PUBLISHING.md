@@ -6,8 +6,9 @@ This project is ready for GitHub Pages deployment.
 
 - Local Git repository initialized on `main`
 - GitHub Pages workflow in `.github/workflows/deploy-pages.yml`
+- Cloud generation workflow in `.github/workflows/generate-brief.yml`
 - Mobile-friendly site output in `site/index.html`
-- Morning automation that refreshes the page content each weekday
+- GitHub-hosted morning generation path
 
 ## What You Need To Do Once
 
@@ -48,7 +49,22 @@ That means the final production workflow should be:
 - push to `origin/main`,
 - let GitHub Pages deploy the updated site.
 
+The repository is now also wired for a cloud-native path:
+- GitHub Actions runs `.github/workflows/generate-brief.yml`
+- that workflow calls the OpenAI Responses API with web search
+- it updates `briefs/`, `site/index.html`, and `watchlist_candidates.json`
+- it commits and pushes the result
+- `deploy-pages.yml` publishes the refreshed site
+
+## Required Secret
+
+To make cloud generation work, set this repository secret:
+
+- `OPENAI_API_KEY`
+
+Without that secret, the scheduled generator workflow will fail fast with a clear error.
+
 ## Notes
 
-- The current local setup is ready for this.
-- If you want, the next step is to wire the morning automation so it also commits and pushes automatically after each update.
+- GitHub cron uses UTC, not London time.
+- To avoid BST/GMT drift, the scheduled workflow runs hourly on weekdays and the script itself only generates the brief when the current `Europe/London` hour is `8`.
